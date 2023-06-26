@@ -1,4 +1,5 @@
 import PropTypes from 'prop-types';
+import { Form, FormTitle, FormWrapper } from './PhoneBookForm.styled';
 
 export const PhoneBookForm = ({
   nameField,
@@ -8,8 +9,8 @@ export const PhoneBookForm = ({
 }) => {
   return (
     <>
-      <h1>Phonebook</h1>
-      <form>
+      <FormTitle>Phonebook</FormTitle>
+      <Form>
         <span>Name:</span>
         <input
           type="text"
@@ -33,7 +34,7 @@ export const PhoneBookForm = ({
         <button onClick={addContact} type="submit">
           Add contact
         </button>
-      </form>
+      </Form>
     </>
   );
 };

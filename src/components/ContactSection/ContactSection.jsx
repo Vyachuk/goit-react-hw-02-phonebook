@@ -1,7 +1,9 @@
+import { FormTitle } from 'components/PhoneBookForm/PhoneBookForm.styled';
+
 export const ContactSection = ({ children }) => {
   return (
     <>
-      <h2>Contacts</h2>
+      <FormTitle>Contacts</FormTitle>
       {children}
     </>
   );

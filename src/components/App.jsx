@@ -1,4 +1,5 @@
 import { Component } from 'react';
+import { Wrapper } from './App.styled';
 import { ContactList } from './ContactList/ContactList';
 import { ContactSection } from './ContactSection/ContactSection';
 import { ContactsSerchField } from './ContactsSerchField/ContactsSerchField';
@@ -60,7 +61,7 @@ export class App extends Component {
     const { contacts, name, number, filter } = this.state;
     const filteredData = this.handleContactsFilter();
     return (
-      <div>
+      <Wrapper>
         <PhoneBookForm
           nameField={name}
           numberField={number}
@@ -74,7 +75,7 @@ export class App extends Component {
             deleteContact={this.handleDeleteContact}
           />
         </ContactSection>
-      </div>
+      </Wrapper>
     );
   }
 }
