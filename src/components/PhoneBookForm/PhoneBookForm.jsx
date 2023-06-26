@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { Form, FormTitle, FormWrapper } from './PhoneBookForm.styled';
+import { Form, FormTitle } from './PhoneBookForm.styled';
 
 export const PhoneBookForm = ({
   nameField,

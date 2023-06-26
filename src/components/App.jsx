@@ -58,7 +58,7 @@ export class App extends Component {
     });
   };
   render() {
-    const { contacts, name, number, filter } = this.state;
+    const { name, number, filter } = this.state;
     const filteredData = this.handleContactsFilter();
     return (
       <Wrapper>
