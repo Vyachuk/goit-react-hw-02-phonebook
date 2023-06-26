@@ -13,20 +13,10 @@ export class App extends Component {
       { id: 'id-3', name: 'Eden Clements', number: '645-17-79' },
       { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
     ],
-    name: '',
-    number: '',
     filter: '',
   };
-
-  onInfoChange = e => {
-    const { name, value } = e.target;
-    this.setState({
-      [name]: value,
-    });
-  };
-  onAddContact = e => {
-    const { name, contacts } = this.state;
-    e.preventDefault();
+  onAddContact = ({ name, number }) => {
+    const { contacts } = this.state;
     const isExist = contacts.find(
       contact => contact.name.toLowerCase() === name.toLowerCase()
     );
@@ -37,15 +27,13 @@ export class App extends Component {
             ...prevState.contacts,
             {
               id: crypto.randomUUID(),
-              name: prevState.name,
-              number: prevState.number,
+              name,
+              number,
             },
           ],
-          name: '',
-          number: '',
         }));
   };
-  handleContactsFilter = () => {
+  getContactsFiltered = () => {
     const { contacts, filter } = this.state;
     return contacts.filter(contact =>
       contact.name.toLowerCase().includes(filter.toLowerCase())
@@ -53,23 +41,27 @@ export class App extends Component {
   };
 
   handleDeleteContact = id => {
+    this.setState(prevState => ({
+      contacts: prevState.contacts.filter(contact => contact.id !== id),
+    }));
+  };
+
+  handleInfoChange = e => {
     this.setState({
-      contacts: this.state.contacts.filter(contact => contact.id !== id),
+      filter: e.target.value,
     });
   };
   render() {
-    const { name, number, filter } = this.state;
-    const filteredData = this.handleContactsFilter();
+    const { filter } = this.state;
+    const filteredData = this.getContactsFiltered();
     return (
       <Wrapper>
-        <PhoneBookForm
-          nameField={name}
-          numberField={number}
-          onInfoChange={this.onInfoChange}
-          addContact={this.onAddContact}
-        />
+        <PhoneBookForm addContact={this.onAddContact} />
         <ContactSection>
-          <ContactsSerchField value={filter} onInfoChange={this.onInfoChange} />
+          <ContactsSerchField
+            value={filter}
+            onInfoChange={this.handleInfoChange}
+          />
           <ContactList
             contacts={filteredData}
             deleteContact={this.handleDeleteContact}
